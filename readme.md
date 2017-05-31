@@ -4,7 +4,7 @@ Inoh Jung
 
 
 1. Implementation OCR (Coursera)
-    ![Alt text](./page_res/fig001.png)
+    <img width="300" height="300">![multi-class classification](./page_res/fig001.png)</img>
     
     - GNU Octave 3.8 (mac os)
     - Multi-class Classification
