@@ -6,7 +6,7 @@ Portfolio
 
 1. OCR implementation, multi-class classification (Coursera)
 
-    - https://github.com/ino-jeong/Portfolio/tree/master/OCR (multiclass_classification)
+    - https://github.com/ino-jeong/Portfolio/tree/master/OCR(multiclass_classification)
     - Test set accuracy : 94.86%
     - Octave(추천) 또는 Matlab에서 main.m 실행
     - 구현환경 : GNU Octave 3.8, Mac OS
@@ -22,7 +22,7 @@ Portfolio
 
 2. OCR implementation, neural-net (Coursera)
 
-    - https://github.com/ino-jeong/Portfolio/tree/master/OCR (neural_net)
+    - https://github.com/ino-jeong/Portfolio/tree/master/OCR(neural_net)
     - Test set accuracy : 95~96% (up to random initialization)
     - Octave(추천) 또는 Matlab에서 main.m 실행
     - 구현환경 : GNU Octave 3.8, Mac OS
@@ -36,7 +36,7 @@ Portfolio
 
 3. K-means clustering (Coursera)
 
-    - https://github.com/ino-jeong/Portfolio/tree/master/k_means (K_means)
+    - https://github.com/ino-jeong/Portfolio/tree/master/k_means
     - Octave(추천) 또는 Matlab에서 main.m 실행
     - Basic k-means clustering implementation
     - 구현환경 : GNU Octave 3.8, Mac OS
