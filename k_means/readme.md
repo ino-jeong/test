@@ -10,7 +10,7 @@ Portfolio
 
     - https://github.com/ino-jeong/Portfolio/tree/master/k_means (K_means)
     - Octave(추천) 또는 Matlab에서 main.m 실행
-    - Basic k-means clustering implementation (left : iteration 1 / right : after 8 iteration)
+    - Basic k-means clustering implementation
     - 구현환경 : GNU Octave 3.8, Mac OS
     - Coursera Machine Learning 과정 구현 과제
     - Model : K-means
