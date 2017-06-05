@@ -1,39 +1,32 @@
-function [J grad] = nnCostFunction(nn_params, ...
-                                   input_layer_size, ...
-                                   hidden_layer_size, ...
-                                   num_labels, ...
-                                   X, y, lambda)
-%NNCOSTFUNCTION Implements the neural network cost function for a two layer
-%neural network which performs classification
-%   [J grad] = NNCOSTFUNCTON(nn_params, hidden_layer_size, num_labels, ...
-%   X, y, lambda) computes the cost and gradient of the neural network. The
-%   parameters for the neural network are "unrolled" into the vector
-%   nn_params and need to be converted back into the weight matrices. 
-% 
-%   The returned parameter grad should be a "unrolled" vector of the
-%   partial derivatives of the neural network.
+% This is Machine Learning Online Class from Coursera, Exercise 4
 %
+% codes implemented by applicant as assignment of online course are :
+%
+%     sigmoidGradient.m
+%     nnCostFunction.m
+%
+% nnCostFunction implements the neural network cost function for a two layer
+% neural network which performs classification
 
-% Reshape nn_params back into the parameters Theta1 and Theta2, the weight matrices
-% for our 2 layer neural network
-Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
-                 hidden_layer_size, (input_layer_size + 1));
 
-Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):end), ...
-                 num_labels, (hidden_layer_size + 1));
+function [J grad] = nnCostFunction(nn_params, input_layer_size, hidden_layer_size, num_labels, X, y, lambda)
+
+% Reshape nn_params back into the parameters Theta1 and Theta2, the weight matrices for our 2 layer neural network
+Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), hidden_layer_size, (input_layer_size + 1));
+Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):end), num_labels, (hidden_layer_size + 1));
 
 % Setup some useful variables
 m = size(X, 1);
-         
-% You need to return the following variables correctly 
 J = 0;
 Theta1_grad = zeros(size(Theta1));
 Theta2_grad = zeros(size(Theta2));
+delta1 = zeros(size(Theta1));
+delta2 = zeros(size(Theta2));
 
-delta1=zeros(size(Theta1));
-delta2=zeros(size(Theta2));
+X_ = [ones(size(X,1),1) X];     % Add bias term in X
 
-% ====================== YOUR CODE HERE ======================
+
+% ====================== YOUR CODE HERE (Coursera) ======================
 % Instructions: You should complete the code by working through the
 %               following parts.
 %
@@ -65,51 +58,46 @@ delta2=zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
-%Add bias term in X
-X_ = [ones(size(X,1),1) X];
 
-%for each i_th training set, calculate cost and adding it to itself.
-for t=1:m
+% for each i_th training set, calculate cost and adding it to itself.
+for t = 1:m
 
-z2=Theta1*X_(t,:)';
-a2=sigmoid(z2);
+    % perform forward propagation first to get errors
+    z2 = Theta1 * X_(t,:)';
+    a2 = sigmoid(z2);
+    a2 = [ones(1,size(a2,2)) ; a2];     % add bias term in a2
 
-%add bias term in a2
-a2 = [ones(1,size(a2,2)) ; a2];
+    z3 = Theta2 * a2;
+    h = sigmoid(z3);  % h == a3
 
-z3=Theta2*a2;
-h=sigmoid(z3);  %h == a3
+    % get true label y of this training set
+    yt = zeros(size(Theta2,1),1);
+    yt(y(t,1),1) = 1;
 
-yt=zeros(size(Theta2,1),1);
-yt(y(t,1),1)=1;
+    % compute cost
+    J = J + sum( -yt.*log(h) - (1-yt).*log(1-h) );
 
-J=J + sum( -yt.*log(h) - (1-yt).*log(1-h) );
+    % calculate errors at each layer (back propagation)
+    er3 = h - yt;
+    er2 = Theta2(:,2:end)' * er3 .* sigmoidGradient(z2);    % note that bias term is removed from Theta2
 
-er3=h-yt;
-er2=Theta2(:,2:end)' * er3 .* sigmoidGradient(z2); %note that bias term is removed from Theta2
-
-delta2=delta2+er3*a2';
-delta1=delta1+er2*X_(t,:);
-
+    delta2 = delta2 + er3 * a2';
+    delta1 = delta1 + er2 * X_(t,:);
 end
 
-reg = sum( sum(Theta1(:,2:end).*Theta1(:,2:end)) ) + sum( sum(Theta2(:,2:end).*Theta2(:,2:end)) );
 
+% add regularization term
+reg = sum( sum(Theta1(:,2:end) .* Theta1(:,2:end)) ) + sum( sum(Theta2(:,2:end) .* Theta2(:,2:end)) );
+J = J/m + lambda/(2*m) * reg;
 
-J=J/m + lambda/(2*m)*reg;
+Theta2_grad = 1/m * delta2;     % Theta2_grad = D2 = 1/m * delta2, without regularization
+Theta1_grad = 1/m * delta1;     % Theta1_grad = D1 = 1/m * delta1, without regularization
 
-Theta2_grad = 1/m * delta2;  %Theta2_grad = D2 = 1/m * delta2, without regularization
-Theta1_grad = 1/m * delta1;  %Theta1_grad = D1 = 1/m * delta1, without regularization
-
-Theta2_grad(:,2:end) = Theta2_grad(:,2:end) + lambda/m * Theta2(:,2:end);
-Theta1_grad(:,2:end) = Theta1_grad(:,2:end) + lambda/m * Theta1(:,2:end);
-
-% -------------------------------------------------------------
+Theta2_grad(:,2:end) = Theta2_grad(:,2:end) + lambda/m * Theta2(:,2:end);   % (add regularization term)
+Theta1_grad(:,2:end) = Theta1_grad(:,2:end) + lambda/m * Theta1(:,2:end);   % (add regularization term)
 
 % =========================================================================
-
 % Unroll gradients
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
-
 
 end
