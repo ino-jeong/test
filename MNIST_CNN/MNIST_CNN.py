@@ -4,8 +4,8 @@
 # 1. Tensorflow official tutorial
 #   https://www.tensorflow.org/get_started/mnist/pros
 #
-# 2. 'DeepLearningZeroToAll' by prof. Sunghun-Kim.
-#   https://github.com/hunkim/DeepLearningZeroToAll/
+# 2. 'DeepLearningZeroToAll' lecture by prof. Sunghun-Kim.
+#   http://hunkim.github.io/ml/
 #
 
 import tensorflow as tf
@@ -38,7 +38,7 @@ def conv2d(layer, input_weight):
 
 # initializing parameters
 learning_rate = 0.01
-training_epochs = 10
+training_epochs = 15
 batch_size = 100
 total_batch = int(mnist.train.num_examples / batch_size)
 

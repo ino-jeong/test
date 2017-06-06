@@ -1,15 +1,11 @@
 Portfolio
 =
 
-정인오 / inoh.jung@gmail.com / 010-9907-9386
+정인오 / inoh.jung@gmail.com
 
-
-
-
-2. OCR implementation, neural-net (Coursera)
-
+- OCR implementation, neural-net (Coursera)
     - https://github.com/ino-jeong/Portfolio/tree/master/OCR(neural_net)
-    - Test set accuracy : 95~96% (up to random initialization)
+    - Training set accuracy : 95~96% (up to random initialization)
     - Octave(추천) 또는 Matlab에서 main.m 실행
     - 구현환경 : GNU Octave 3.8, Mac OS
     - Coursera Machine Learning 과정 구현 과제

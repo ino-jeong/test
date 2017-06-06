@@ -1,14 +1,11 @@
 Portfolio
 =
 
-정인오 / inoh.jung@gmail.com / 010-9907-9386
+정인오 / inoh.jung@gmail.com
 
-
-
-
-1. OCR implementation, multi-class classification (Coursera)
+- OCR implementation, multi-class classification (Coursera)
     - https://github.com/ino-jeong/Portfolio/tree/master/OCR(multiclass_classification)
-    - Test set accuracy : 94.86%
+    - Training set accuracy : 94.86%
     - Octave(추천) 또는 Matlab에서 main.m 실행
     - 구현환경 : GNU Octave 3.8, Mac OS
     - Coursera Machine Learning 과정 구현 과제
