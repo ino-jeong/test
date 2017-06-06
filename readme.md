@@ -42,7 +42,7 @@ Portfolio
       + 'DeepLearningZeroToAll' lecture by prof. Sunghun-Kim
     http://hunkim.github.io/ml/
     - Training set : as per MNIST specification (28 X 28 pixel, grayscale)
-    - Model : Convolusion Neural Network :
+    - Model : Convolution Neural Network :
       - 1st layer :
         convolution with 3x3 filter, 1 channel in / 32 channel out → ReLu → Max-Pooling with 2x2 filter
       - 2nd layer :
